@@ -1,114 +1,135 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta name="google-site-verification" content="vX-5ZB1X2V4NejNVtVONvslT-3pcW75cCWlIoNZob2I" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الرادار الجنائي PRO</title>
-    <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.0/dist/exif-reader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
-    <style>
-        :root{--bg:#030712;--card:#0b1329;--accent:#38bdf8;--accent-glow:rgba(56,189,248,.4);--text:#f1f5f9;--muted:#64748b;--border:#1e293b;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--purple:#a855f7}
-        *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,sans-serif}
-        body{background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem}
-        .container{max-width:1300px;margin:0 auto}
-        header{text-align:center;margin-bottom:2.5rem}
-        header h1{color:var(--accent);font-size:2.2rem;text-shadow:0 0 25px var(--accent-glow);margin-bottom:.5rem}
-        header p{color:var(--muted);font-size:1rem}
-        .dropzone{border:2px dashed #0284c7;background:rgba(11,19,41,.7);padding:3.5rem 1.5rem;text-align:center;border-radius:20px;cursor:pointer;transition:all .3s ease;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-        .dropzone:hover,.dropzone.dragover{border-color:var(--accent);background:#111e38;box-shadow:0 0 30px var(--accent-glow)}
-        .dropzone input{display:none}
-        .results{display:none;margin-top:2rem}
-        .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;margin-bottom:1.5rem}
-        .preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;align-items:center}
-        .img-container{position:relative;width:100%;max-width:320px;margin:0 auto;overflow:hidden;border-radius:12px;border:1px solid var(--border)}
-        .preview-img{width:100%;height:auto;display:block}
-        .badge-list{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
-        .badge{padding:.4rem .9rem;border-radius:8px;font-size:.85rem;font-weight:bold;background:#1e293b;color:#fff}
-        .badge.success{background:rgba(16,185,129,.2);color:var(--success);border:1px solid var(--success)}
-        .badge.warning{background:rgba(245,158,11,.2);color:var(--warning);border:1px solid var(--warning)}
-        .badge.danger{background:rgba(239,68,68,.2);color:var(--danger);border:1px solid var(--danger)}
-        .badge.purple{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
-        .section-title{font-size:1.25rem;color:var(--accent);margin-bottom:1rem;border-right:4px solid var(--accent);padding-right:.8rem}
-        table{width:100%;border-collapse:collapse;text-align:right;font-size:.9rem}
-        th,td{padding:.8rem 1rem;border-bottom:1px solid var(--border)}
-        th{color:var(--muted);background:#070d19}
-        td:first-child{font-weight:bold;color:var(--accent);width:40%}
-        code{color:#22d3ee;font-family:'Courier New',monospace;word-break:break-all}
-        .grid-visuals{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-        .canvas-box{background:#050a14;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
-        .canvas-box h4{color:var(--accent);margin-bottom:.8rem;font-size:.95rem}
-        canvas{width:100%;max-height:250px;object-fit:contain;border-radius:8px;background:#000;border:1px solid var(--border)}
-        .actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
-        .btn{background:var(--accent);color:#000;border:none;padding:.8rem 1.8rem;font-weight:bold;border-radius:10px;cursor:pointer;transition:.2s}
-        .btn:hover{opacity:.9;transform:translateY(-2px)}
-        .btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
-        .inspector{background:#050a14;padding:1rem;border-radius:10px;border:1px solid var(--border);display:flex;justify-content:space-between;font-family:monospace}
-        .progress-bar{width:100%;height:8px;background:#1e293b;border-radius:4px;overflow:hidden;margin-top:.5rem}
-        .progress-fill{height:100%;background:linear-gradient(90deg,var(--success),var(--warning),var(--danger));transition:width .8s ease}
-        .meter{display:flex;flex-direction:column;gap:.3rem}
-        .meter-label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
-        .qr-result{background:#050a14;padding:1rem;border-radius:8px;margin-top:.5rem;border:1px dashed var(--purple);color:var(--purple);font-family:monospace}
-        @media print{.actions,.dropzone{display:none!important}}
-    </style>
+<meta name="google-site-verification" content="vX-5ZB1X2V4NejNVtVONvslT-3pcW75cCWlIoNZob2I" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الرادار الجنائي PRO</title>
+<script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.0/dist/exif-reader.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<style>
+:root{--bg:#030712;--card:#0b1329;--accent:#38bdf8;--accent-glow:rgba(56,189,248,.4);--text:#f1f5f9;--muted:#64748b;--border:#1e293b;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--purple:#a855f7}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem}
+.container{max-width:1300px;margin:0 auto}
+header{text-align:center;margin-bottom:2.5rem}
+header h1{color:var(--accent);font-size:2.2rem;text-shadow:0 0 25px var(--accent-glow);margin-bottom:.5rem}
+header p{color:var(--muted);font-size:1rem}
+.dropzone{border:2px dashed #0284c7;background:rgba(11,19,41,.7);padding:3.5rem 1.5rem;text-align:center;border-radius:20px;cursor:pointer;transition:all .3s ease;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.dropzone:hover,.dropzone.dragover{border-color:var(--accent);background:#111e38;box-shadow:0 0 30px var(--accent-glow)}
+.dropzone input{display:none}
+.results{display:none;margin-top:2rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;margin-bottom:1.5rem}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;align-items:center}
+.img-container{position:relative;width:100%;max-width:320px;margin:0 auto;overflow:hidden;border-radius:12px;border:1px solid var(--border)}
+.preview-img{width:100%;height:auto;display:block}
+.badge-list{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.badge{padding:.4rem .9rem;border-radius:8px;font-size:.85rem;font-weight:bold;background:#1e293b;color:#fff;display:inline-block}
+.badge.success{background:rgba(16,185,129,.2);color:var(--success);border:1px solid var(--success)}
+.badge.warning{background:rgba(245,158,11,.2);color:var(--warning);border:1px solid var(--warning)}
+.badge.danger{background:rgba(239,68,68,.2);color:var(--danger);border:1px solid var(--danger)}
+.badge.purple{background:rgba(168,85,247,.2);color:var(--purple);border:1px solid var(--purple)}
+.section-title{font-size:1.25rem;color:var(--accent);margin-bottom:1rem;border-right:4px solid var(--accent);padding-right:.8rem}
+table{width:100%;border-collapse:collapse;text-align:right;font-size:.9rem}
+th,td{padding:.8rem 1rem;border-bottom:1px solid var(--border)}
+th{color:var(--muted);background:#070d19}
+td:first-child{font-weight:bold;color:var(--accent);width:40%}
+code{color:#22d3ee;font-family:'Courier New',monospace;word-break:break-all}
+.grid-visuals{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.canvas-box{background:#050a14;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+.canvas-box h4{color:var(--accent);margin-bottom:.8rem;font-size:.95rem}
+canvas{width:100%;max-height:250px;object-fit:contain;border-radius:8px;background:#000;border:1px solid var(--border)}
+.actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+.btn{background:var(--accent);color:#000;border:none;padding:.8rem 1.8rem;font-weight:bold;border-radius:10px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn:hover{opacity:.9;transform:translateY(-2px)}
+.btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+.inspector{background:#050a14;padding:1rem;border-radius:10px;border:1px solid var(--border);display:flex;justify-content:space-between;font-family:monospace;flex-wrap:wrap;gap:.5rem}
+.progress-bar{width:100%;height:8px;background:#1e293b;border-radius:4px;overflow:hidden;margin-top:.5rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--danger),var(--warning),var(--success));transition:width .8s ease}
+.meter{display:flex;flex-direction:column;gap:.3rem}
+.meter-label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.qr-result{background:#050a14;padding:1rem;border-radius:8px;margin-top:.5rem;border:1px dashed var(--purple);color:var(--purple);font-family:monospace;word-break:break-all}
+.gps-buttons{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.device-banner{display:flex;align-items:center;gap:1rem;padding:1rem;background:#050a14;border-radius:12px;border:1px solid var(--border);margin-bottom:1rem;flex-wrap:wrap}
+.device-icon{font-size:2.5rem}
+.device-info h4{color:var(--accent);margin-bottom:.3rem}
+.device-info p{color:var(--muted);font-size:.85rem}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:6px;font-size:.75rem;background:#1e293b;margin-left:.3rem}
+@media print{.actions,.dropzone{display:none!important}}
+</style>
 </head>
 <body>
 <div class="container">
-    <header>
-        <h1>الرادار الجنائي PRO 🔬</h1>
-        <p>كشف التلاعب (ELA)، الاستخفاء الرقمي (LSB)، البصمات التشفيرية، QR Codes، والبيانات الوصفية</p>
-    </header>
+<header>
+<h1>الرادار الجنائي PRO 🔬</h1>
+<p>كشف التلاعب ELA، الاستخفاء LSB، بصمات EXIF الكاملة، GPS، QR، وتصنيف الأجهزة الذكي</p>
+</header>
 
-    <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
-        <h3>📁 قم بإسقاط الصورة هنا أو اضغط للرفع</h3>
-        <p style="color:var(--muted);margin-top:.5rem;">تدعم JPEG, PNG, WEBP, TIFF, GIF حتى 50MB</p>
-        <input type="file" id="fileInput" accept="image/*">
-    </div>
+<div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+<h3>📁 قم بإسقاط الصورة هنا أو اضغط للرفع</h3>
+<p style="color:var(--muted);margin-top:.5rem;">تدعم JPEG, PNG, WEBP, TIFF, HEIC, GIF حتى 50MB</p>
+<input type="file" id="fileInput" accept="image/*">
+</div>
 
-    <div class="results" id="results">
-        <div class="card preview-grid">
-            <div class="img-container"><img id="imgPreview" class="preview-img" alt="معاينة"></div>
-            <div>
-                <h2 id="lblFileName" style="color:var(--accent);margin-bottom:.5rem;">-</h2>
-                <p id="lblFileDimensions" style="color:var(--muted);margin-bottom:.8rem;">الأبعاد: -</p>
-                <div class="badge-list">
-                    <span class="badge" id="lblFileType">-</span>
-                    <span class="badge" id="lblIntegrity">-</span>
-                    <span class="badge" id="lblTamperStatus">-</span>
-                    <span class="badge" id="lblAiStatus">-</span>
-                </div>
-                <div class="meter" style="margin-top:1rem;">
-                    <div class="meter-label"><span>مؤشر الثقة الرقمي:</span><span id="trustScore">-</span></div>
-                    <div class="progress-bar"><div class="progress-fill" id="trustBar" style="width:0%;"></div></div>
-                </div>
-            </div>
-        </div>
+<div class="results" id="results">
+<div class="card">
+<div class="preview-grid">
+<div class="img-container"><img id="imgPreview" class="preview-img" alt="معاينة"></div>
+<div>
+<h2 id="lblFileName" style="color:var(--accent);margin-bottom:.5rem;">-</h2>
+<p id="lblFileDimensions" style="color:var(--muted);margin-bottom:.8rem;">الأبعاد: -</p>
+<div class="badge-list">
+<span class="badge" id="lblFileType">-</span>
+<span class="badge" id="lblIntegrity">-</span>
+<span class="badge" id="lblTamperStatus">-</span>
+<span class="badge" id="lblAiStatus">-</span>
+<span class="badge" id="lblSource">-</span>
+</div>
+<div class="meter" style="margin-top:1rem;">
+<div class="meter-label"><span>مؤشر الثقة الرقمي:</span><span id="trustScore">-</span></div>
+<div class="progress-bar"><div class="progress-fill" id="trustBar" style="width:0%;"></div></div>
+</div>
+</div>
+</div>
+</div>
 
-        <div class="card"><h3 class="section-title">🔐 البصمات الرقمية</h3><table><tbody id="hashTableBody"></tbody></table></div>
-        <div class="card"><h3 class="section-title">🕵️ فحص الاستخفاء الرقمي</h3><table><tbody id="stegoTableBody"></tbody></table></div>
-        <div class="card"><h3 class="section-title">📊 التحليل الإحصائي المتقدم</h3><table><tbody id="statsTableBody"></tbody></table></div>
-        <div class="card"><h3 class="section-title">📷 البيانات الوصفية EXIF</h3><table><tbody id="exifTableBody"></tbody></table><div id="gpsMapContainer" style="margin-top:1rem;"></div></div>
-        <div class="card" id="qrCard" style="display:none;"><h3 class="section-title">📱 الرموز المكتشفة</h3><div id="qrResults"></div></div>
+<div class="card" id="deviceCard" style="display:none;">
+<h3 class="section-title">🎯 هوية الجهاز المُلتقط</h3>
+<div class="device-banner">
+<div class="device-icon" id="deviceIcon">❓</div>
+<div class="device-info" style="flex:1;">
+<h4 id="deviceTitle">-</h4>
+<p id="deviceSubtitle">-</p>
+<div id="deviceTags" style="margin-top:.5rem;"></div>
+</div>
+</div>
+</div>
 
-        <div class="grid-visuals">
-            <div class="canvas-box"><h4>🔬 تحليل ELA الحقيقي</h4><canvas id="elaCanvas"></canvas></div>
-            <div class="canvas-box"><h4>📈 التوزيع RGB</h4><canvas id="histCanvas"></canvas></div>
-            <div class="canvas-box"><h4>🔍 كشف LSB</h4><canvas id="lsbCanvas"></canvas></div>
-            <div class="canvas-box"><h4>🎨 خريطة الحواف</h4><canvas id="edgeCanvas"></canvas></div>
-        </div>
+<div class="card"><h3 class="section-title">🔐 البصمات الرقمية</h3><table><tbody id="hashTableBody"></tbody></table></div>
+<div class="card"><h3 class="section-title">🕵️ فحص الاستخفاء الرقمي</h3><table><tbody id="stegoTableBody"></tbody></table></div>
+<div class="card"><h3 class="section-title">📊 التحليل الإحصائي المتقدم</h3><table><tbody id="statsTableBody"></tbody></table></div>
+<div class="card"><h3 class="section-title">📷 البيانات الوصفية EXIF الكاملة</h3><table><tbody id="exifTableBody"></tbody></table><div id="gpsMapContainer" style="margin-top:1rem;"></div></div>
+<div class="card" id="qrCard" style="display:none;"><h3 class="section-title">📱 الرموز المكتشفة</h3><div id="qrResults"></div></div>
 
-        <div class="card inspector" style="margin-top:1.5rem;">
-            <span>🎯 فحص البكسل:</span>
-            <span id="pixelData" style="color:var(--accent);">مرّر الماوس فوق الصورة</span>
-        </div>
+<div class="grid-visuals">
+<div class="canvas-box"><h4>🔬 تحليل ELA الحقيقي</h4><canvas id="elaCanvas"></canvas></div>
+<div class="canvas-box"><h4>📈 التوزيع RGB</h4><canvas id="histCanvas"></canvas></div>
+<div class="canvas-box"><h4>🔍 كشف LSB</h4><canvas id="lsbCanvas"></canvas></div>
+<div class="canvas-box"><h4>🎨 خريطة الحواف</h4><canvas id="edgeCanvas"></canvas></div>
+</div>
 
-        <div class="actions">
-            <button class="btn" onclick="exportReportJSON()">📥 تصدير JSON</button>
-            <button class="btn btn-outline" onclick="window.print()">🖨️ طباعة PDF</button>
-            <button class="btn" style="background:var(--success);color:#000;" onclick="window.location.reload()">🔄 صورة جديدة</button>
-        </div>
-    </div>
+<div class="card inspector" style="margin-top:1.5rem;">
+<span>🎯 فحص البكسل:</span>
+<span id="pixelData" style="color:var(--accent);">مرّر الماوس فوق الصورة</span>
+</div>
+
+<div class="actions">
+<button class="btn" onclick="exportReportJSON()">📥 تصدير JSON</button>
+<button class="btn btn-outline" onclick="window.print()">🖨️ طباعة PDF</button>
+<button class="btn" style="background:var(--success);color:#000;" onclick="window.location.reload()">🔄 صورة جديدة</button>
+</div>
+</div>
 </div>
 <canvas id="hiddenCanvas" style="display:none;"></canvas>
 <script>
@@ -117,7 +138,7 @@ const fileInput=document.getElementById('fileInput');
 const results=document.getElementById('results');
 const imgPreview=document.getElementById('imgPreview');
 const hiddenCanvas=document.getElementById('hiddenCanvas');
-let reportData={timestamp:new Date().toISOString()};
+let reportData={timestamp:new Date().toISOString(),version:'2.0'};
 let loadedImgContext=null;
 
 ['dragenter','dragover'].forEach(e=>dropzone.addEventListener(e,evt=>{evt.preventDefault();dropzone.classList.add('dragover')}));
@@ -125,284 +146,550 @@ let loadedImgContext=null;
 dropzone.addEventListener('drop',e=>{if(e.dataTransfer.files[0])processFile(e.dataTransfer.files[0])});
 fileInput.addEventListener('change',e=>{if(e.target.files[0])processFile(e.target.files[0])});
 
-async function processFile(file){
-    if(!file.type.startsWith('image/'))return alert('اختر صورة مدعومة');
-    if(file.size>50*1024*1024)return alert('الحجم يتجاوز 50MB');
-    document.getElementById('lblFileName').textContent=file.name;
-    document.getElementById('lblFileType').textContent=file.type.toUpperCase().split('/')[1]||'IMG';
-    const arrayBuffer=await file.arrayBuffer();
-    
-    const wordArray=CryptoJS.lib.WordArray.create(arrayBuffer);
-    const md5=CryptoJS.MD5(wordArray).toString();
-    const sha1=CryptoJS.SHA1(wordArray).toString();
-    const sha256=CryptoJS.SHA256(wordArray).toString();
-    const sha512=CryptoJS.SHA512(wordArray).toString().substring(0,64)+'...';
-    document.getElementById('hashTableBody').innerHTML=`
-        <tr><td>MD5</td><td><code>${md5}</code></td></tr>
-        <tr><td>SHA-1</td><td><code>${sha1}</code></td></tr>
-        <tr><td>SHA-256</td><td><code>${sha256}</code></td></tr>
-        <tr><td>SHA-512</td><td><code>${sha512}</code></td></tr>`;
-    reportData.hashes={md5,sha1,sha256,fileSize:file.size,mime:file.type};
+async function extractExifAdvanced(arrayBuffer){
+const fieldsMap={
+make:['Make'],model:['Model'],software:['Software'],
+lensModel:['LensModel','Lens','LensInfo','LensSpecification'],
+dateTimeOriginal:['DateTimeOriginal','DateTime','CreateDate','ModifyDate'],
+fNumber:['FNumber','ApertureValue','MaxApertureValue'],
+exposureTime:['ExposureTime','ShutterSpeedValue'],
+iso:['ISOSpeedRatings','PhotographicSensitivity','ISO'],
+focalLength:['FocalLength','FocalLengthIn35mmFilm'],
+flash:['Flash'],whiteBalance:['WhiteBalance'],orientation:['Orientation'],
+meteringMode:['MeteringMode'],exposureProgram:['ExposureProgram'],
+artist:['Artist'],copyright:['Copyright'],imageDescription:['ImageDescription'],
+userComment:['UserComment'],bodySerial:['BodySerialNumber','SerialNumber','CameraSerialNumber'],
+lensSerial:['LensSerialNumber'],exifVersion:['ExifVersion'],colorSpace:['ColorSpace'],
+pixelXDimension:['PixelXDimension'],pixelYDimension:['PixelYDimension'],
+resolutionUnit:['ResolutionUnit'],xResolution:['XResolution'],yResolution:['YResolution']
+};
+const out={};
+let tags={};
+try{tags=await ExifReader.load(arrayBuffer,{expanded:true})}catch(err){
+console.warn('EXIF parse error:',err);
+return{fields:out,raw:null,gps:null,error:err.message};
+}
+const merged=Object.assign({},tags.exif||{},tags.iptc||{},tags.xmp||{},tags.file||{},tags.photoshop||{},tags.pngFile||{},tags.riff||{});
+const pickValue=(key)=>{
+const entry=merged[key];
+if(!entry)return null;
+if(typeof entry==='object'){
+if(entry.description!==undefined&&entry.description!=='')return entry.description;
+if(entry.value!==undefined){
+if(Array.isArray(entry.value))return entry.value.map(v=>typeof v==='object'?v.value:v).join(', ');
+return entry.value;
+}
+}
+return entry;
+};
+for(const[field,aliases]of Object.entries(fieldsMap)){
+for(const alias of aliases){
+const v=pickValue(alias);
+if(v!==null&&v!==undefined&&v!==''){out[field]=v;break}
+}
+}
+let gps=null;
+const gpsTags=tags.gps||{};
+if(gpsTags.GPSLatitude&&gpsTags.GPSLongitude){
+let lat,lon;
+try{
+if(gpsTags.GPSLatitude.description&&gpsTags.GPSLongitude.description){
+lat=parseFloat(gpsTags.GPSLatitude.description);
+lon=parseFloat(gpsTags.GPSLongitude.description);
+}
+if(isNaN(lat)||isNaN(lon)){
+const latRef=gpsTags.GPSLatitudeRef?.value?.[0]||gpsTags.GPSLatitudeRef?.description||'N';
+const lonRef=gpsTags.GPSLongitudeRef?.value?.[0]||gpsTags.GPSLongitudeRef?.description||'E';
+lat=dmsToDecimal(gpsTags.GPSLatitude.value,latRef);
+lon=dmsToDecimal(gpsTags.GPSLongitude.value,lonRef);
+}
+if(!isNaN(lat)&&!isNaN(lon)){
+gps={lat,lon,altitude:gpsTags.GPSAltitude?.description||null,speed:gpsTags.GPSSpeed?.description||null,direction:gpsTags.GPSImgDirection?.description||null,dateStamp:gpsTags.GPSDateStamp?.description||null,mapDatum:gpsTags.GPSMapDatum?.description||null};
+}
+}catch(err){console.warn('GPS parse error:',err)}
+}
+return{fields:out,raw:merged,gps,error:null};
+}
 
-    const uint8=new Uint8Array(arrayBuffer);
-    const fileText=new TextDecoder('latin1').decode(uint8);
-    let suspicious=[];
-    const patterns={'<?php':'PHP','<script':'JavaScript','eval(':'eval()','PK\x03\x04':'ZIP','MZ':'Windows EXE','\x7fELF':'Linux ELF','base64,':'Base64'};
-    for(const[pat,name]of Object.entries(patterns)){if(fileText.includes(pat))suspicious.push(name)}
-    const tail=fileText.slice(-512);
-    const hasTrailingData=/[\x00-\x08\x0E-\x1F]/.test(tail.slice(-50));
-    const stegoStatus=suspicious.length>0
-        ?`<span class="badge danger">⚠️ ${suspicious.join(', ')}</span>`
-        :`<span class="badge success">✅ لا أكواد خفية</span>`;
-    document.getElementById('stegoTableBody').innerHTML=`
-        <tr><td>الأكواد المدمجة</td><td>${stegoStatus}</td></tr>
-        <tr><td>بايتات زائدة</td><td>${hasTrailingData?'<span class="badge warning">مشتبه بها</span>':'<span class="badge success">نظيفة</span>'}</td></tr>
-        <tr><td>الحجم</td><td>${file.size.toLocaleString()} بايت (${(file.size/1024).toFixed(2)} KB)</td></tr>
-        <tr><td>النوع</td><td>${file.type}</td></tr>`;
-    reportData.stego={suspicious,hasTrailingData};
+function dmsToDecimal(dms,ref){
+if(!Array.isArray(dms)||dms.length<3)return NaN;
+const[d,m,s]=dms.map(x=>typeof x==='object'?x.value||0:x);
+let dec=parseFloat(d)+(parseFloat(m)/60)+(parseFloat(s)/3600);
+if(ref==='S'||ref==='W')dec=-dec;
+return dec;
+}
 
-    let exifTags={};
-    try{exifTags=ExifReader.load(arrayBuffer)}catch(e){}
-    const g=(tag)=>exifTags[tag]?exifTags[tag].description:'غير متوفر';
-    let gpsInfo="لا توجد إحداثيات";
-    if(exifTags['GPSLatitude']&&exifTags['GPSLongitude']){
-        const lat=exifTags['GPSLatitude'].description;
-        const lon=exifTags['GPSLongitude'].description;
-        gpsInfo=`${lat} , ${lon}`;
-        document.getElementById('gpsMapContainer').innerHTML=`<a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="btn btn-outline" style="font-size:.85rem;">📍 عرض على Google Maps</a>`;
-    }
-    document.getElementById('exifTableBody').innerHTML=`
-        <tr><td>الشركة</td><td>${g('Make')}</td></tr>
-        <tr><td>الطراز</td><td>${g('Model')}</td></tr>
-        <tr><td>البرنامج</td><td>${g('Software')}</td></tr>
-        <tr><td>تاريخ التصوير</td><td>${g('DateTimeOriginal')}</td></tr>
-        <tr><td>آخر تعديل</td><td>${g('DateTime')}</td></tr>
-        <tr><td>F/ISO</td><td>f/${g('FNumber')} | ${g('ExposureTime')}s | ISO ${g('ISOSpeedRatings')}</td></tr>
-        <tr><td>GPS</td><td>${gpsInfo}</td></tr>`;
-    reportData.exif={make:g('Make'),model:g('Model'),software:g('Software')};
+function classifyImageSource(exif,filename,mime,fileSize,dimensions){
+const make=(exif.make||'').toString();
+const model=(exif.model||'').toString();
+const software=(exif.software||'').toString();
+const combined=(make+' '+model+' '+software).toLowerCase();
+const phoneBrands=[
+{name:'Apple iPhone',icon:'🍎',kw:['apple','iphone']},
+{name:'Apple iPad',icon:'🍎',kw:['ipad']},
+{name:'Samsung Galaxy',icon:'📱',kw:['samsung','sm-','gt-','galaxy','sgh']},
+{name:'Xiaomi / Redmi',icon:'📱',kw:['xiaomi','redmi','poco','m200','m210','220112']},
+{name:'Huawei / Honor',icon:'📱',kw:['huawei','honor','hwe','ane-','lya-','mha-']},
+{name:'Oppo',icon:'📱',kw:['oppo','cph','pegm']},
+{name:'Realme',icon:'📱',kw:['realme','rmx']},
+{name:'Vivo',icon:'📱',kw:['vivo','v19','v20','v21','v22']},
+{name:'OnePlus',icon:'📱',kw:['oneplus','le21','ne22']},
+{name:'Google Pixel',icon:'📱',kw:['google','pixel']},
+{name:'Nokia',icon:'📱',kw:['nokia','ta-']},
+{name:'Motorola',icon:'📱',kw:['motorola','moto']},
+{name:'Tecno',icon:'📱',kw:['tecno']},
+{name:'Infinix',icon:'📱',kw:['infinix']}
+];
+const cameraBrands=[
+{name:'Canon',icon:'📷',kw:['canon','eos','powershot']},
+{name:'Nikon',icon:'📷',kw:['nikon','d3','d5','d7','z6','z7','z9']},
+{name:'Sony',icon:'📷',kw:['sony','ilce','dslr','nex']},
+{name:'Fujifilm',icon:'📷',kw:['fuji','x-t','x100','x-s']},
+{name:'Panasonic',icon:'📷',kw:['panasonic','lumix','dc-']},
+{name:'Olympus / OM',icon:'📷',kw:['olympus','om system','om-']},
+{name:'Leica',icon:'📷',kw:['leica']},
+{name:'Pentax',icon:'📷',kw:['pentax']},
+{name:'Ricoh',icon:'📷',kw:['ricoh']},
+{name:'GoPro',icon:'🎥',kw:['gopro']},
+{name:'DJI',icon:'🚁',kw:['dji','fc']},
+{name:'Sigma',icon:'📷',kw:['sigma']}
+];
+const aiSignatures=['midjourney','dall-e','dalle','stable diffusion','sdxl','flux','comfyui','automatic1111','invokeai','firefly','leonardo','runway','krea','grok','gemini','imagen','nano banana'];
+const editingSoftware=['photoshop','lightroom','gimp','affinity','capture one','snapseed','picsart','canva','pixlr','paint.net','luminar','topaz','dxo','rawtherapee'];
+const result={category:'unknown',brand:null,icon:'❓',label:'غير محدد',badgeClass:'warning',confidence:0,editingSoftware:null,aiSignature:null,tags:[]};
+for(const sig of aiSignatures){
+if(combined.includes(sig)){
+result.category='ai';result.icon='🤖';
+result.label=`مولّد بالذكاء الاصطناعي (${sig})`;
+result.badgeClass='danger';result.confidence=95;result.aiSignature=sig;
+result.tags.push(`بصمة: ${sig}`);
+return result;
+}
+}
+for(const sw of editingSoftware){
+if(combined.includes(sw)){result.editingSoftware=sw;result.tags.push(`محرر: ${sw}`)}
+}
+for(const brand of phoneBrands){
+if(brand.kw.some(k=>combined.includes(k))){
+result.category='phone';result.brand=brand.name;result.icon=brand.icon;
+result.label=brand.name;result.badgeClass='success';result.confidence=90;
+return result;
+}
+}
+for(const brand of cameraBrands){
+if(brand.kw.some(k=>combined.includes(k))){
+result.category='camera';result.brand=brand.name;result.icon=brand.icon;
+result.label=brand.name;result.badgeClass='purple';result.confidence=90;
+return result;
+}
+}
+if(mime==='image/png'&&!exif.make&&!exif.model){
+result.category='screenshot';result.icon='🖥️';
+result.label='لقطة شاشة محتملة';result.badgeClass='warning';result.confidence=55;
+return result;
+}
+if(!exif.make&&!exif.model&&(mime==='image/jpeg'||mime==='image/jpg')){
+result.category='stripped';result.icon='📤';
+result.label='EXIF محذوف (واتساب/تليجرام/تويتر)';
+result.badgeClass='warning';result.confidence=75;
+return result;
+}
+if(exif.make||exif.model){
+result.label=(make+' '+model).trim()||'جهاز غير معروف';
+result.category='partial';result.icon='📸';result.badgeClass='warning';result.confidence=50;
+return result;
+}
+return result;
+}
+    async function processFile(file){
+if(!file.type.startsWith('image/'))return alert('اختر صورة مدعومة');
+if(file.size>50*1024*1024)return alert('الحجم يتجاوز 50MB');
+document.getElementById('lblFileName').textContent=file.name;
+document.getElementById('lblFileType').textContent=(file.type.split('/')[1]||'IMG').toUpperCase();
+const arrayBuffer=await file.arrayBuffer();
 
-    const reader=new FileReader();
-    reader.onload=function(e){
-        imgPreview.src=e.target.result;
-        const img=new Image();
-        img.onload=async function(){
-            document.getElementById('lblFileDimensions').textContent=`الأبعاد: ${img.width} × ${img.height} px`;
-            hiddenCanvas.width=img.width;hiddenCanvas.height=img.height;
-            const ctx=hiddenCanvas.getContext('2d',{willReadFrequently:true});
-            ctx.drawImage(img,0,0);
-            loadedImgContext={ctx,width:img.width,height:img.height};
-            const imgData=ctx.getImageData(0,0,img.width,img.height);
-            
-            const tamperScore=await performRealELA(img,img.width,img.height);
-            generateHistogram(imgData);
-            const lsbScore=analyzeLSB(imgData);
-            generateEdgeMap(imgData);
-            const entropy=calculateEntropy(imgData);
-            const noise=calculateNoise(imgData);
-            const aiProbability=detectAIGenerated(entropy,noise,imgData);
+const wordArray=CryptoJS.lib.WordArray.create(arrayBuffer);
+const md5=CryptoJS.MD5(wordArray).toString();
+const sha1=CryptoJS.SHA1(wordArray).toString();
+const sha256=CryptoJS.SHA256(wordArray).toString();
+const sha512=CryptoJS.SHA512(wordArray).toString().substring(0,80)+'...';
+document.getElementById('hashTableBody').innerHTML=`
+<tr><td>MD5</td><td><code>${md5}</code></td></tr>
+<tr><td>SHA-1</td><td><code>${sha1}</code></td></tr>
+<tr><td>SHA-256</td><td><code>${sha256}</code></td></tr>
+<tr><td>SHA-512 (مختصر)</td><td><code>${sha512}</code></td></tr>`;
+reportData.hashes={md5,sha1,sha256,fileSize:file.size,mime:file.type};
 
-            document.getElementById('statsTableBody').innerHTML=`
-                <tr><td>Shannon Entropy</td><td>${entropy.toFixed(4)} / 8.0 ${entropy>7.9?'<span class="badge warning">عالية</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
-                <tr><td>مستوى الضوضاء</td><td>${noise.toFixed(4)} ${noise<5?'<span class="badge warning">منخفضة</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
-                <tr><td>LSB مشبوه</td><td>${lsbScore.toFixed(2)}% ${lsbScore>60?'<span class="badge danger">استخفاء</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
-                <tr><td>AI Generated</td><td>${aiProbability.toFixed(1)}% ${aiProbability>60?'<span class="badge danger">مرتفعة</span>':'<span class="badge success">منخفضة</span>'}</td></tr>`;
+const uint8=new Uint8Array(arrayBuffer);
+const fileText=new TextDecoder('latin1').decode(uint8);
+const suspicious=[];
+const patterns={'<?php':'PHP','<script':'JavaScript','eval(':'eval()','PK\x03\x04':'ZIP/Office','MZ':'Windows EXE','\x7fELF':'Linux ELF','base64,':'Base64'};
+for(const[pat,name]of Object.entries(patterns)){
+if(fileText.includes(pat))suspicious.push(name);
+}
+const tail=fileText.slice(-512);
+const hasTrailingData=/[\x00-\x08\x0E-\x1F]/.test(tail.slice(-50));
+const stegoStatus=suspicious.length>0
+?`<span class="badge danger">⚠️ ${suspicious.join(', ')}</span>`
+:`<span class="badge success">✅ لا أكواد خفية</span>`;
+document.getElementById('stegoTableBody').innerHTML=`
+<tr><td>الأكواد المدمجة</td><td>${stegoStatus}</td></tr>
+<tr><td>بايتات زائدة في النهاية</td><td>${hasTrailingData?'<span class="badge warning">مشتبه بها</span>':'<span class="badge success">نظيفة</span>'}</td></tr>
+<tr><td>الحجم الكامل</td><td>${file.size.toLocaleString()} بايت (${(file.size/1024).toFixed(2)} KB)</td></tr>
+<tr><td>النوع الفعلي</td><td>${file.type}</td></tr>`;
+reportData.stego={suspicious,hasTrailingData,size:file.size};
 
-            const trustScore=Math.max(0,100-tamperScore-(lsbScore>60?30:0)-(hasTrailingData?15:0));
-            document.getElementById('trustScore').textContent=`${trustScore}%`;
-            document.getElementById('trustBar').style.width=trustScore+'%';
+const exifData=await extractExifAdvanced(arrayBuffer);
+const exif=exifData.fields;
 
-            const lblIntegrity=document.getElementById('lblIntegrity');
-            const lblTamper=document.getElementById('lblTamperStatus');
-            const lblAi=document.getElementById('lblAiStatus');
-            lblIntegrity.className='badge success';lblIntegrity.textContent='السلامة: سليمة';
-            if(tamperScore>25){lblTamper.className='badge danger';lblTamper.textContent=`تلاعب: عالي (${tamperScore}%)`}
-            else if(tamperScore>10){lblTamper.className='badge warning';lblTamper.textContent=`تلاعب: متوسط (${tamperScore}%)`}
-            else{lblTamper.className='badge success';lblTamper.textContent=`تلاعب: منخفض (${tamperScore}%)`}
-            if(aiProbability>60){lblAi.className='badge danger';lblAi.textContent=`AI: محتمل (${aiProbability.toFixed(0)}%)`}
-            else{lblAi.className='badge purple';lblAi.textContent=`AI: ضعيف (${aiProbability.toFixed(0)}%)`}
+let gpsHtml='<span style="color:#64748b;">لا توجد إحداثيات GPS</span>';
+let gpsButtons='';
+if(exifData.gps){
+const{lat,lon,altitude,speed,direction,dateStamp}=exifData.gps;
+gpsHtml=`<span class="badge success">📍 ${lat.toFixed(6)}, ${lon.toFixed(6)}</span>`;
+if(altitude)gpsHtml+=` <span class="badge">⛰️ ${altitude}</span>`;
+if(speed)gpsHtml+=` <span class="badge">🚀 ${speed}</span>`;
+if(direction)gpsHtml+=` <span class="badge">🧭 ${direction}</span>`;
+if(dateStamp)gpsHtml+=` <span class="badge">📅 ${dateStamp}</span>`;
+gpsButtons=`
+<div class="gps-buttons">
+<a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" class="btn btn-outline" style="font-size:.85rem;">📍 Google Maps</a>
+<a href="https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}" target="_blank" class="btn btn-outline" style="font-size:.85rem;">🗺️ OpenStreetMap</a>
+<a href="https://www.bing.com/maps?cp=${lat}~${lon}&lvl=17" target="_blank" class="btn btn-outline" style="font-size:.85rem;">🌍 Bing Maps</a>
+</div>`;
+}
+document.getElementById('gpsMapContainer').innerHTML=gpsButtons;
 
-            readQRCode(imgData,img.width,img.height);
-            reportData.analysis={tamperScore,lsbScore,entropy,noise,aiProbability,trustScore};
-            results.style.display='block';
-        };
-        img.src=e.target.result;
-    };
-    reader.readAsDataURL(file);
+const row=(label,value,badge)=>{
+if(value===null||value===undefined||value==='')return`<tr><td>${label}</td><td style="color:#64748b;">غير متوفر</td></tr>`;
+const v=typeof value==='object'?JSON.stringify(value):String(value);
+return`<tr><td>${label}</td><td>${badge?`<span class="badge ${badge}">${v}</span>`:v}</td></tr>`;
+};
+
+document.getElementById('exifTableBody').innerHTML=`
+${row('🏭 الشركة المُصنّعة',exif.make)}
+${row('📱 الطراز',exif.model)}
+${row('💿 البرنامج / النظام',exif.software)}
+${row('🔭 العدسة',exif.lensModel)}
+${row('📅 تاريخ التصوير الأصلي',exif.dateTimeOriginal)}
+${row('🎛️ فتحة العدسة',exif.fNumber?`f/${exif.fNumber}`:null)}
+${row('⏱️ سرعة الغالق',exif.exposureTime?`${exif.exposureTime}`:null)}
+${row('📊 حساسية ISO',exif.iso)}
+${row('🔍 البعد البؤري',exif.focalLength?`${exif.focalLength}`:null)}
+${row('⚡ الفلاش',exif.flash)}
+${row('⚖️ توازن البياض',exif.whiteBalance)}
+${row('🧭 اتجاه الصورة',exif.orientation)}
+${row('📐 برنامج التعريض',exif.exposureProgram)}
+${row('📏 نمط القياس',exif.meteringMode)}
+${row('🎨 مساحة الألوان',exif.colorSpace)}
+${row('📄 وصف الصورة',exif.imageDescription)}
+${row('👤 الفنان / المُصوّر',exif.artist)}
+${row('©️ حقوق النشر',exif.copyright)}
+${row('🔢 الرقم التسلسلي للجسم',exif.bodySerial)}
+${row('🔢 الرقم التسلسلي للعدسة',exif.lensSerial)}
+${row('💬 تعليق المستخدم',exif.userComment)}
+${row('📏 الدقة X',exif.xResolution)}
+${row('📏 الدقة Y',exif.yResolution)}
+<tr><td>🌍 الإحداثيات الجغرافية</td><td>${gpsHtml}</td></tr>
+`;
+reportData.exif={...exif,gps:exifData.gps};
+
+const sourceInfo=classifyImageSource(exif,file.name,file.type,file.size,{});
+const lblSource=document.getElementById('lblSource');
+lblSource.className='badge '+sourceInfo.badgeClass;
+lblSource.textContent=sourceInfo.icon+' '+sourceInfo.label;
+
+if(sourceInfo.category!=='unknown'){
+document.getElementById('deviceCard').style.display='block';
+document.getElementById('deviceIcon').textContent=sourceInfo.icon;
+document.getElementById('deviceTitle').textContent=sourceInfo.label;
+document.getElementById('deviceSubtitle').textContent=
+exif.make||exif.model
+?`${exif.make||''} ${exif.model||''}`.trim()
+:'لا توجد بيانات مفصّلة';
+const tags=[];
+if(sourceInfo.brand)tags.push(`<span class="tag">${sourceInfo.brand}</span>`);
+if(sourceInfo.editingSoftware)tags.push(`<span class="tag" style="color:var(--warning);">✏️ ${sourceInfo.editingSoftware}</span>`);
+if(sourceInfo.aiSignature)tags.push(`<span class="tag" style="color:var(--danger);">🤖 ${sourceInfo.aiSignature}</span>`);
+if(exif.lensModel)tags.push(`<span class="tag">🔭 ${exif.lensModel}</span>`);
+if(exif.software&&!sourceInfo.editingSoftware)tags.push(`<span class="tag">${exif.software}</span>`);
+tags.push(`<span class="tag">ثقة: ${sourceInfo.confidence}%</span>`);
+document.getElementById('deviceTags').innerHTML=tags.join('');
+}
+reportData.sourceClassification=sourceInfo;
+
+const reader=new FileReader();
+reader.onload=function(e){
+imgPreview.src=e.target.result;
+const img=new Image();
+img.onload=async function(){
+document.getElementById('lblFileDimensions').textContent=`الأبعاد: ${img.width} × ${img.height} px`;
+hiddenCanvas.width=img.width;
+hiddenCanvas.height=img.height;
+const ctx=hiddenCanvas.getContext('2d',{willReadFrequently:true});
+ctx.drawImage(img,0,0);
+loadedImgContext={ctx,width:img.width,height:img.height};
+
+const imgData=ctx.getImageData(0,0,img.width,img.height);
+
+const tamperScore=await performRealELA(img,img.width,img.height);
+generateHistogram(imgData);
+const lsbScore=analyzeLSB(imgData);
+generateEdgeMap(imgData);
+const entropy=calculateEntropy(imgData);
+const noise=calculateNoise(imgData);
+const aiProbability=detectAIGenerated(entropy,noise,imgData);
+
+document.getElementById('statsTableBody').innerHTML=`
+<tr><td>Shannon Entropy</td><td>${entropy.toFixed(4)} / 8.0 ${entropy>7.9?'<span class="badge warning">عالية</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
+<tr><td>مستوى الضوضاء</td><td>${noise.toFixed(4)} ${noise<3?'<span class="badge warning">منخفضة (AI محتمل)</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
+<tr><td>مؤشر LSB الاستخفائي</td><td>${lsbScore.toFixed(2)}% ${lsbScore>60?'<span class="badge danger">استخفاء</span>':'<span class="badge success">طبيعية</span>'}</td></tr>
+<tr><td>احتمال AI Generated</td><td>${aiProbability.toFixed(1)}% ${aiProbability>60?'<span class="badge danger">مرتفعة</span>':'<span class="badge success">منخفضة</span>'}</td></tr>
+<tr><td>مؤشر ELA للتلاعب</td><td>${tamperScore}% ${tamperScore>25?'<span class="badge danger">تلاعب</span>':tamperScore>10?'<span class="badge warning">متوسط</span>':'<span class="badge success">سليم</span>'}</td></tr>`;
+
+const trustScore=Math.max(0,Math.min(100,100-tamperScore-(lsbScore>60?30:0)-(hasTrailingData?15:0)-(aiProbability>60?20:0)));
+document.getElementById('trustScore').textContent=`${trustScore}%`;
+document.getElementById('trustBar').style.width=trustScore+'%';
+
+const lblIntegrity=document.getElementById('lblIntegrity');
+const lblTamper=document.getElementById('lblTamperStatus');
+const lblAi=document.getElementById('lblAiStatus');
+
+lblIntegrity.className='badge '+(trustScore>70?'success':trustScore>40?'warning':'danger');
+lblIntegrity.textContent=`السلامة: ${trustScore>70?'سليمة':trustScore>40?'مشكوك':'مخترقة'}`;
+
+if(tamperScore>25){lblTamper.className='badge danger';lblTamper.textContent=`تلاعب: عالي (${tamperScore}%)`}
+else if(tamperScore>10){lblTamper.className='badge warning';lblTamper.textContent=`تلاعب: متوسط (${tamperScore}%)`}
+else{lblTamper.className='badge success';lblTamper.textContent=`تلاعب: منخفض (${tamperScore}%)`}
+
+if(aiProbability>60){lblAi.className='badge danger';lblAi.textContent=`AI: محتمل (${aiProbability.toFixed(0)}%)`}
+else{lblAi.className='badge purple';lblAi.textContent=`AI: ضعيف (${aiProbability.toFixed(0)}%)`}
+
+readQRCode(imgData,img.width,img.height);
+reportData.analysis={tamperScore,lsbScore,entropy,noise,aiProbability,trustScore};
+results.style.display='block';
+console.log('📊 التقرير الكامل:',reportData);
+};
+img.src=e.target.result;
+};
+reader.readAsDataURL(file);
 }
 
 function performRealELA(img,width,height){
-    return new Promise(resolve=>{
-        const elaCanvas=document.getElementById('elaCanvas');
-        elaCanvas.width=width;elaCanvas.height=height;
-        const eCtx=elaCanvas.getContext('2d');
-        eCtx.drawImage(img,0,0);
-        const compressed=document.createElement('canvas');
-        compressed.width=width;compressed.height=height;
-        const cCtx=compressed.getContext('2d');
-        cCtx.drawImage(img,0,0);
-        const dataURL=compressed.toDataURL('image/jpeg',0.85);
-        const recompressed=new Image();
-        recompressed.onload=function(){
-            cCtx.drawImage(recompressed,0,0);
-            const origData=eCtx.getImageData(0,0,width,height);
-            const compData=cCtx.getImageData(0,0,width,height);
-            let diffSum=0,maxDiff=0;
-            const totalPixels=width*height;
-            const o=origData.data,c=compData.data;
-            for(let i=0;i<o.length;i+=4){
-                const dr=Math.abs(o[i]-c[i]);
-                const dg=Math.abs(o[i+1]-c[i+1]);
-                const db=Math.abs(o[i+2]-c[i+2]);
-                const diff=(dr+dg+db)/3;
-                diffSum+=diff;if(diff>maxDiff)maxDiff=diff;
-                const intensity=Math.min(255,diff*8);
-                o[i]=intensity;o[i+1]=intensity>128?255-intensity:intensity/2;o[i+2]=0;
-            }
-            eCtx.putImageData(origData,0,0);
-            resolve(Math.min(100,Math.round((diffSum/totalPixels)*1.5+(maxDiff/255)*20)));
-        };
-        recompressed.src=dataURL;
-    });
+return new Promise(resolve=>{
+const elaCanvas=document.getElementById('elaCanvas');
+elaCanvas.width=width;
+elaCanvas.height=height;
+const eCtx=elaCanvas.getContext('2d');
+eCtx.drawImage(img,0,0);
+const compressed=document.createElement('canvas');
+compressed.width=width;
+compressed.height=height;
+const cCtx=compressed.getContext('2d');
+cCtx.drawImage(img,0,0);
+const dataURL=compressed.toDataURL('image/jpeg',0.85);
+const recompressed=new Image();
+recompressed.onload=function(){
+cCtx.drawImage(recompressed,0,0);
+const origData=eCtx.getImageData(0,0,width,height);
+const compData=cCtx.getImageData(0,0,width,height);
+let diffSum=0,maxDiff=0;
+const totalPixels=width*height;
+const o=origData.data,c=compData.data;
+for(let i=0;i<o.length;i+=4){
+const dr=Math.abs(o[i]-c[i]);
+const dg=Math.abs(o[i+1]-c[i+1]);
+const db=Math.abs(o[i+2]-c[i+2]);
+const diff=(dr+dg+db)/3;
+diffSum+=diff;
+if(diff>maxDiff)maxDiff=diff;
+const intensity=Math.min(255,diff*8);
+o[i]=intensity;
+o[i+1]=intensity>128?255-intensity:intensity/2;
+o[i+2]=0;
+}
+eCtx.putImageData(origData,0,0);
+resolve(Math.min(100,Math.round((diffSum/totalPixels)*1.5+(maxDiff/255)*20)));
+};
+recompressed.src=dataURL;
+});
 }
 
 function generateHistogram(imgData){
-    const canvas=document.getElementById('histCanvas');
-    canvas.width=256;canvas.height=120;
-    const hCtx=canvas.getContext('2d');
-    hCtx.fillStyle='#050a14';hCtx.fillRect(0,0,256,120);
-    const data=imgData.data;
-    const rH=new Array(256).fill(0),gH=new Array(256).fill(0),bH=new Array(256).fill(0);
-    for(let i=0;i<data.length;i+=16){rH[data[i]]++;gH[data[i+1]]++;bH[data[i+2]]++}
-    const max=Math.max(...rH,...gH,...bH,1);
-    const draw=(hist,color)=>{
-        hCtx.strokeStyle=color;hCtx.lineWidth=1;hCtx.beginPath();
-        for(let x=0;x<256;x++){const y=120-(hist[x]/max)*110;x===0?hCtx.moveTo(x,y):hCtx.lineTo(x,y)}
-        hCtx.stroke();
-    };
-    draw(rH,'#ef4444');draw(gH,'#10b981');draw(bH,'#38bdf8');
+const canvas=document.getElementById('histCanvas');
+canvas.width=256;
+canvas.height=120;
+const hCtx=canvas.getContext('2d');
+hCtx.fillStyle='#050a14';
+hCtx.fillRect(0,0,256,120);
+const data=imgData.data;
+const rH=new Array(256).fill(0),gH=new Array(256).fill(0),bH=new Array(256).fill(0);
+for(let i=0;i<data.length;i+=16){
+rH[data[i]]++;
+gH[data[i+1]]++;
+bH[data[i+2]]++;
+}
+const max=Math.max(...rH,...gH,...bH,1);
+const draw=(hist,color)=>{
+hCtx.strokeStyle=color;
+hCtx.lineWidth=1;
+hCtx.beginPath();
+for(let x=0;x<256;x++){
+const y=120-(hist[x]/max)*110;
+x===0?hCtx.moveTo(x,y):hCtx.lineTo(x,y);
+}
+hCtx.stroke();
+};
+draw(rH,'#ef4444');
+draw(gH,'#10b981');
+draw(bH,'#38bdf8');
 }
 
 function analyzeLSB(imgData){
-    const canvas=document.getElementById('lsbCanvas');
-    const w=Math.min(400,imgData.width),h=Math.min(300,imgData.height);
-    canvas.width=w;canvas.height=h;
-    const lCtx=canvas.getContext('2d');
-    const outData=lCtx.createImageData(w,h);
-    let suspiciousPixels=0,total=0;
-    const data=imgData.data;
-    for(let y=0;y<h;y++){
-        for(let x=0;x<w;x++){
-            const i=(y*imgData.width+x)*4;
-            const j=(y*w+x)*4;
-            outData.data[j]=(data[i]&1)*255;
-            outData.data[j+1]=(data[i+1]&1)*255;
-            outData.data[j+2]=(data[i+2]&1)*255;
-            outData.data[j+3]=255;
-            const bitSum=(data[i]&1)+(data[i+1]&1)+(data[i+2]&1);
-            if(bitSum===1||bitSum===2)suspiciousPixels++;
-            total++;
-        }
-    }
-    lCtx.putImageData(outData,0,0);
-    return (suspiciousPixels/total)*100;
+const canvas=document.getElementById('lsbCanvas');
+const w=Math.min(400,imgData.width),h=Math.min(300,imgData.height);
+canvas.width=w;
+canvas.height=h;
+const lCtx=canvas.getContext('2d');
+const outData=lCtx.createImageData(w,h);
+let suspiciousPixels=0,total=0;
+const data=imgData.data;
+for(let y=0;y<h;y++){
+for(let x=0;x<w;x++){
+const i=(y*imgData.width+x)*4;
+const j=(y*w+x)*4;
+outData.data[j]=(data[i]&1)*255;
+outData.data[j+1]=(data[i+1]&1)*255;
+outData.data[j+2]=(data[i+2]&1)*255;
+outData.data[j+3]=255;
+const bitSum=(data[i]&1)+(data[i+1]&1)+(data[i+2]&1);
+if(bitSum===1||bitSum===2)suspiciousPixels++;
+total++;
+}
+}
+lCtx.putImageData(outData,0,0);
+return(suspiciousPixels/total)*100;
 }
 
 function generateEdgeMap(imgData){
-    const canvas=document.getElementById('edgeCanvas');
-    const w=Math.min(400,imgData.width),h=Math.min(300,imgData.height);
-    canvas.width=w;canvas.height=h;
-    const eCtx=canvas.getContext('2d');
-    const outData=eCtx.createImageData(w,h);
-    const data=imgData.data;
-    const gray=new Float32Array(w*h);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-        const i=(y*imgData.width+x)*4;
-        gray[y*w+x]=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
-    }
-    const sx=[-1,0,1,-2,0,2,-1,0,1],sy=[-1,-2,-1,0,0,0,1,2,1];
-    for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
-        let gx=0,gy=0;
-        for(let ky=-1;ky<=1;ky++)for(let kx=-1;kx<=1;kx++){
-            const v=gray[(y+ky)*w+(x+kx)];
-            gx+=v*sx[(ky+1)*3+(kx+1)];
-            gy+=v*sy[(ky+1)*3+(kx+1)];
-        }
-        const mag=Math.min(255,Math.sqrt(gx*gx+gy*gy));
-        const j=(y*w+x)*4;
-        outData.data[j]=mag;outData.data[j+1]=mag;outData.data[j+2]=mag;outData.data[j+3]=255;
-    }
-    eCtx.putImageData(outData,0,0);
+const canvas=document.getElementById('edgeCanvas');
+const w=Math.min(400,imgData.width),h=Math.min(300,imgData.height);
+canvas.width=w;
+canvas.height=h;
+const eCtx=canvas.getContext('2d');
+const outData=eCtx.createImageData(w,h);
+const data=imgData.data;
+const gray=new Float32Array(w*h);
+for(let y=0;y<h;y++){
+for(let x=0;x<w;x++){
+const i=(y*imgData.width+x)*4;
+gray[y*w+x]=0.299*data[i]+0.587*data[i+1]+0.114*data[i+2];
+}
+}
+const sx=[-1,0,1,-2,0,2,-1,0,1];
+const sy=[-1,-2,-1,0,0,0,1,2,1];
+for(let y=1;y<h-1;y++){
+for(let x=1;x<w-1;x++){
+let gx=0,gy=0;
+for(let ky=-1;ky<=1;ky++){
+for(let kx=-1;kx<=1;kx++){
+const v=gray[(y+ky)*w+(x+kx)];
+gx+=v*sx[(ky+1)*3+(kx+1)];
+gy+=v*sy[(ky+1)*3+(kx+1)];
+}
+}
+const mag=Math.min(255,Math.sqrt(gx*gx+gy*gy));
+const j=(y*w+x)*4;
+outData.data[j]=mag;
+outData.data[j+1]=mag;
+outData.data[j+2]=mag;
+outData.data[j+3]=255;
+}
+}
+eCtx.putImageData(outData,0,0);
 }
 
 function calculateEntropy(imgData){
-    const data=imgData.data;
-    const hist=new Array(256).fill(0);
-    for(let i=0;i<data.length;i+=4){hist[data[i]]++;hist[data[i+1]]++;hist[data[i+2]]++}
-    const total=(data.length/4)*3;
-    let entropy=0;
-    for(const h of hist){if(h>0){const p=h/total;entropy-=p*Math.log2(p)}}
-    return entropy;
+const data=imgData.data;
+const hist=new Array(256).fill(0);
+for(let i=0;i<data.length;i+=4){
+hist[data[i]]++;
+hist[data[i+1]]++;
+hist[data[i+2]]++;
+}
+const total=(data.length/4)*3;
+let entropy=0;
+for(const h of hist){
+if(h>0){
+const p=h/total;
+entropy-=p*Math.log2(p);
+}
+}
+return entropy;
 }
 
 function calculateNoise(imgData){
-    const data=imgData.data;
-    const w=imgData.width,h=imgData.height;
-    let sum=0,count=0;
-    for(let y=1;y<h-1;y+=2)for(let x=1;x<w-1;x+=2){
-        const i=(y*w+x)*4;
-        const lap=Math.abs(data[i]*4-data[i-4]-data[i+4]-data[i-w*4]-data[i+w*4]);
-        sum+=lap;count++;
-    }
-    return count>0?sum/count:0;
+const data=imgData.data;
+const w=imgData.width,h=imgData.height;
+let sum=0,count=0;
+for(let y=1;y<h-1;y+=2){
+for(let x=1;x<w-1;x+=2){
+const i=(y*w+x)*4;
+const lap=Math.abs(data[i]*4-data[i-4]-data[i+4]-data[i-w*4]-data[i+w*4]);
+sum+=lap;
+count++;
+}
+}
+return count>0?sum/count:0;
 }
 
 function detectAIGenerated(entropy,noise,imgData){
-    let score=0;
-    if(entropy>7.95)score+=25;
-    if(entropy<6)score+=20;
-    if(noise<3)score+=30;
-    if(noise>30)score+=10;
-    const data=imgData.data;
-    let smoothness=0,samples=0;
-    for(let i=0;i<Math.min(data.length,100000);i+=400){
-        if(Math.abs(data[i]-data[i+4])<2)smoothness++;
-        samples++;
-    }
-    if(samples>0&&smoothness/samples>0.7)score+=25;
-    return Math.min(100,score);
+let score=0;
+if(entropy>7.95)score+=25;
+if(entropy<6)score+=20;
+if(noise<3)score+=30;
+if(noise>30)score+=10;
+const data=imgData.data;
+let smoothness=0,samples=0;
+for(let i=0;i<Math.min(data.length,100000);i+=400){
+if(Math.abs(data[i]-data[i+4])<2)smoothness++;
+samples++;
+}
+if(samples>0&&smoothness/samples>0.7)score+=25;
+return Math.min(100,score);
 }
 
 function readQRCode(imgData,w,h){
-    try{
-        const code=jsQR(imgData.data,w,h);
-        if(code){
-            document.getElementById('qrCard').style.display='block';
-            document.getElementById('qrResults').innerHTML=`<div class="qr-result"><strong>البيانات:</strong><br>${code.data}</div>`;
-            reportData.qrCode=code.data;
-        }
-    }catch(e){console.warn('QR error',e)}
+try{
+const code=jsQR(imgData.data,w,h);
+if(code){
+document.getElementById('qrCard').style.display='block';
+document.getElementById('qrResults').innerHTML=`<div class="qr-result"><strong>البيانات:</strong><br>${code.data}</div>`;
+reportData.qrCode=code.data;
+}
+}catch(e){console.warn('QR error',e)}
 }
 
 imgPreview.addEventListener('mousemove',function(e){
-    if(!loadedImgContext)return;
-    const rect=imgPreview.getBoundingClientRect();
-    const x=Math.floor((e.clientX-rect.left)*(loadedImgContext.width/imgPreview.clientWidth));
-    const y=Math.floor((e.clientY-rect.top)*(loadedImgContext.height/imgPreview.clientHeight));
-    if(x>=0&&y>=0&&x<loadedImgContext.width&&y<loadedImgContext.height){
-        const p=loadedImgContext.ctx.getImageData(x,y,1,1).data;
-        const hex='#'+((1<<24)+(p[0]<<16)+(p[1]<<8)+p[2]).toString(16).slice(1).toUpperCase();
-        document.getElementById('pixelData').textContent=`[X:${x},Y:${y}] | RGBA:(${p[0]},${p[1]},${p[2]},${p[3]}) | Hex:${hex}`;
-    }
+if(!loadedImgContext)return;
+const rect=imgPreview.getBoundingClientRect();
+const x=Math.floor((e.clientX-rect.left)*(loadedImgContext.width/imgPreview.clientWidth));
+const y=Math.floor((e.clientY-rect.top)*(loadedImgContext.height/imgPreview.clientHeight));
+if(x>=0&&y>=0&&x<loadedImgContext.width&&y<loadedImgContext.height){
+const p=loadedImgContext.ctx.getImageData(x,y,1,1).data;
+const hex='#'+((1<<24)+(p[0]<<16)+(p[1]<<8)+p[2]).toString(16).slice(1).toUpperCase();
+document.getElementById('pixelData').textContent=`[X:${x},Y:${y}] | RGBA:(${p[0]},${p[1]},${p[2]},${p[3]}) | Hex:${hex}`;
+}
 });
 
 function exportReportJSON(){
-    const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(reportData,null,4));
-    const a=document.createElement('a');
-    a.setAttribute("href",dataStr);
-    a.setAttribute("download",`Forensic_Report_${Date.now()}.json`);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+const dataStr="data:text/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(reportData,null,4));
+const a=document.createElement('a');
+a.setAttribute("href",dataStr);
+a.setAttribute("download",`Forensic_Report_${Date.now()}.json`);
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
 }
 </script>
 </body>
